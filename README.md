@@ -109,3 +109,23 @@ Categories	- Stores categories associated with an event.
 Enrolments	- Connects Participants to Events and records their selected Category.
 Results	  -  Stores results belonging to an Enrolment.
 RefreshTokens	- Supports JWT authentication and token renewal.
+
+## 6. Users Entity
+
+The Users entity stores both Organisers and Participants.
+
+# Attributes
+Attribute	Type	Description
+UserId - INT	- Primary Key and identity value.
+FullName	- NVARCHAR(150)	- User's full name.
+Email -	NVARCHAR(256) -	Unique user email address.
+PasswordHash	- NVARCHAR(MAX)	- Hashed password.
+Role	- NVARCHAR(20)	- Organiser or Participant.
+PhoneNumber	- NVARCHAR(20)	- Optional phone number.
+CreatedAt	- DATETIME2	- Date/time the user was created.
+# Constraints
+UserId is the Primary Key.
+Email must be unique.
+Email cannot be NULL.
+Role must be either Organiser or Participant.
+Passwords must never be stored as plain text.
