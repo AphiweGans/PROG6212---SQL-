@@ -262,3 +262,92 @@ Relationship
 One User can have many RefreshTokens.
 
 Users 1 → Many RefreshTokens
+
+## 12. ERD Relationships
+
+The complete RaceDay relationship structure is:
+
+USERS
+  │
+  ├───────────────< EVENTS
+  │                    │
+  │                    └────────< CATEGORIES
+  │                                  │
+  │                                  │
+  ├───────────────< ENROLMENTS >─────┘
+  │                     │
+  │                     └──── 0..1 RESULT
+  │
+  └───────────────< REFRESH TOKENS
+Mermaid ERD
+erDiagram
+
+    USERS ||--o{ EVENTS : "organises"
+    EVENTS ||--o{ CATEGORIES : "has"
+
+    USERS ||--o{ ENROLMENTS : "enrols as participant"
+    EVENTS ||--o{ ENROLMENTS : "receives"
+    CATEGORIES ||--o{ ENROLMENTS : "selected in"
+
+    ENROLMENTS ||--o| RESULTS : "produces"
+
+    USERS ||--o{ REFRESHTOKENS : "owns"
+
+    USERS {
+        int UserId PK
+        string FullName
+        string Email
+        string PasswordHash
+        string Role
+        string PhoneNumber
+        datetime CreatedAt
+    }
+
+    EVENTS {
+        int EventId PK
+        int OrganiserId FK
+        string Name
+        string EventType
+        datetime EventDate
+        string Location
+        string Description
+        string RouteInfo
+        string WeatherInfo
+        datetime CreatedAt
+    }
+
+    CATEGORIES {
+        int CategoryId PK
+        int EventId FK
+        string Name
+        decimal DistanceKm
+        int MinAge
+        int MaxAge
+    }
+
+    ENROLMENTS {
+        int EnrolmentId PK
+        int ParticipantId FK
+        int EventId FK
+        int CategoryId FK
+        datetime EnrolmentDate
+        string Status
+    }
+
+    RESULTS {
+        int ResultId PK
+        int EnrolmentId FK
+        time FinishTime
+        int Position
+        string Status
+        datetime RecordedAt
+    }
+
+    REFRESHTOKENS {
+        int TokenId PK
+        int UserId FK
+        string Token
+        datetime ExpiresAt
+        datetime CreatedAt
+        bit Revoked
+    }
