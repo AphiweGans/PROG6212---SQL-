@@ -136,17 +136,17 @@ The Events entity stores events created and managed by Organisers.
 
 # Attributes
 Attribute	Type	Description
-EventId	INT	Primary Key and identity value.
-OrganiserId	INT	Foreign Key to Users.UserId.
-Name	NVARCHAR(150)	Name of the event.
-EventType	NVARCHAR(50)	Event type such as Marathon, Cycling or Walk.
-EventDate	DATETIME2	Date and time of the event.
-Location	NVARCHAR(200)	Event location.
-Description	NVARCHAR(MAX)	Optional event description.
-RouteInfo	NVARCHAR(MAX)	Route description or link.
-WeatherInfo	NVARCHAR(MAX)	Weather-related information.
-CreatedAt	DATETIME2	Date/time the event was created.
-Relationship
+• EventId	- INT	- Primary Key and identity value.
+• OrganiserId	- INT	- Foreign Key to Users.UserId.
+• Name	- NVARCHAR(150)	- Name of the event.
+• EventType	- NVARCHAR(50)	- Event type such as Marathon, Cycling or Walk.
+• EventDate	- DATETIME2	- Date and time of the event.
+• Location	- NVARCHAR(200)	- Event location.
+• Description	- NVARCHAR(MAX)	- Optional event description.
+• RouteInfo	- NVARCHAR(MAX)	- Route description or link.
+• WeatherInfo	- NVARCHAR(MAX)	- Weather-related information.
+• CreatedAt	- DATETIME2	- Date/time the event was created.
+• Relationship
 
 Each Event belongs to exactly one Organiser.
 
@@ -155,3 +155,60 @@ One Organiser can create many Events.
 # Relationship:
 
 Users 1 → Many Events
+## 8. Categories Entity
+
+The Categories entity stores categories associated with individual events.
+
+Examples include:
+
+5km Fun Run
+10km Road Race
+21.1km Half Marathon
+40km Cycle
+80km Cycle
+Attributes
+Attribute	Type	Description
+CategoryId	INT	Primary Key and identity value.
+EventId	INT	Foreign Key to Events.EventId.
+Name	NVARCHAR(100)	Category name.
+DistanceKm	DECIMAL(5,2)	Distance in kilometres.
+MinAge	INT	Optional minimum age.
+MaxAge	INT	Optional maximum age.
+Relationship
+
+One Event can have many Categories.
+
+Each Category belongs to exactly one Event.
+
+Relationship:
+
+Events 1 → Many Categories
+
+## 9. Enrolments Entity
+
+The Enrolments entity represents the relationship between Participants and Events.
+
+It also records the Category selected by the Participant.
+
+Attributes
+Attribute	Type	Description
+EnrolmentId	INT	Primary Key and identity value.
+ParticipantId	INT	Foreign Key to Users.UserId.
+EventId	INT	Foreign Key to Events.EventId.
+CategoryId	INT	Foreign Key to Categories.CategoryId.
+EnrolmentDate	DATETIME2	Date/time of enrolment.
+Status	NVARCHAR(20)	Enrolment status.
+Important Constraint
+
+A Participant cannot enrol in the same Event more than once.
+
+This is enforced using:
+
+UNIQUE (ParticipantId, EventId)
+Relationship
+
+Participants and Events have a many-to-many relationship resolved through Enrolments.
+
+Users ↔ Events
+      |
+ Enrolments
