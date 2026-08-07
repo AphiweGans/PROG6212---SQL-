@@ -207,6 +207,37 @@ This is enforced using:
 UNIQUE (ParticipantId, EventId)
 Relationship
 
+## 10. Results Entity
+
+The Results entity stores the performance result of a participant's enrolment.
+
+Attributes
+Attribute	Type	Description
+ResultId	INT	Primary Key and identity value.
+EnrolmentId	INT	Foreign Key to Enrolments.EnrolmentId.
+FinishTime	TIME	Participant's finishing time.
+Position	INT	Participant's finishing position.
+Status	NVARCHAR(20)	Result status.
+RecordedAt	DATETIME2	Date/time result was recorded.
+Relationship
+
+Each Enrolment can have at most one Result.
+
+This is enforced using:
+
+UNIQUE (EnrolmentId)
+
+Therefore:
+
+Enrolments 1 → 0..1 Results
+
+Possible result statuses include:
+
+Pending
+Finished
+DNF
+DNS
+
 Participants and Events have a many-to-many relationship resolved through Enrolments.
 
 Users ↔ Events
