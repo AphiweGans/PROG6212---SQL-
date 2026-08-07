@@ -351,3 +351,24 @@ erDiagram
         datetime CreatedAt
         bit Revoked
     }
+
+## 13. REST API Endpoint Plan
+
+The RaceDay API uses RESTful endpoints beginning with:
+
+/api/
+
+JWT Bearer authentication is planned for protected endpoints.
+
+JWT claims are expected to contain:
+
+UserId
+Role
+Access Levels
+Access Level	Meaning
+None	Public endpoint. No authentication required.
+Any	Any authenticated user.
+Organiser	Authenticated Organiser only.
+Participant	Authenticated Participant only.
+
+## 
