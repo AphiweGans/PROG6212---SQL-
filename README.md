@@ -10,7 +10,7 @@ RaceDay is a web-based event management platform designed for the South African 
 
 The system is intended to improve the management of road events by providing a structured platform where Event Organisers can create and manage events, categories, participants, enrolments, and results, while Participants can browse upcoming events, enter events, and view their personal performance history.
 
-Part 1 focuses on system planning and database design. No application or API implementation is included at this stage.
+Part 1 : focuses on system planning and database design. No application or API implementation is included at this stage.
 
 The three major deliverables are:
 
