@@ -481,3 +481,35 @@ name
 distanceKm
 minAge
 maxAge
+
+## 17. Enrolment Endpoints
+Method	Endpoint	Role
+POST	/api/events/{eventId}/enrolments	Participant
+GET	/api/users/me/enrolments	Participant
+GET	/api/events/{eventId}/enrolments	Organiser
+DELETE	/api/enrolments/{enrolmentId}	Participant
+Enrolment Request
+{
+  "categoryId": 2
+}
+
+Expected responses may include:
+
+201 Created
+404 Not Found
+409 Conflict
+
+A 409 Conflict occurs when the Participant is already enrolled in the Event.
+
+Result Endpoints
+Method	Endpoint	Role
+POST	/api/enrolments/{enrolmentId}/result	Organiser
+PUT	/api/results/{resultId}	Organiser
+GET	/api/events/{eventId}/results	None
+GET	/api/users/me/results	Participant
+
+Result fields:
+
+finishTime
+position
+status
