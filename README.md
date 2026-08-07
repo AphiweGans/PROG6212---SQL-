@@ -443,3 +443,41 @@ Security Rule
 The /me endpoints must always use the authenticated user's UserId from the JWT.
 
 A user must not be able to access or edit another user's profile using these endpoints.
+
+## 16. Event Endpoints
+Method	Endpoint	Role
+GET	/api/events	None
+GET	/api/events/{eventId}	None
+POST	/api/events	Organiser
+PUT	/api/events/{eventId}	Organiser
+DELETE	/api/events/{eventId}	Organiser
+GET	/api/events/{eventId}/weather	None
+Event Creation
+POST /api/events
+
+Request fields:
+
+name
+eventType
+eventDate
+location
+description
+routeInfo
+
+Expected:
+
+201 Created
+400 Bad Request
+Categories
+Method	Endpoint	Role
+GET	/api/events/{eventId}/categories	None
+POST	/api/events/{eventId}/categories	Organiser
+PUT	/api/categories/{categoryId}	Organiser
+DELETE	/api/categories/{categoryId}	Organiser
+
+Category request fields:
+
+name
+distanceKm
+minAge
+maxAge
