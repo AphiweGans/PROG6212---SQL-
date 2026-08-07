@@ -371,4 +371,75 @@ Any	Any authenticated user.
 Organiser	Authenticated Organiser only.
 Participant	Authenticated Participant only.
 
-## 
+## 14. Authentication Endpoints
+Method	Endpoint	Purpose	Role
+POST	/api/auth/register	Register a new Organiser or Participant.	None
+POST	/api/auth/login	Authenticate and issue access/refresh tokens.	None
+POST	/api/auth/refresh	Exchange refresh token for a new access token.	None
+POST	/api/auth/logout	Revoke a refresh token.	Any
+Registration
+POST /api/auth/register
+
+Request:
+
+{
+  "fullName": "Example User",
+  "email": "user@example.com",
+  "password": "password",
+  "role": "Participant",
+  "phoneNumber": "0730000000"
+}
+
+Expected responses:
+
+201 Created
+409 Conflict
+Login
+POST /api/auth/login
+
+Request:
+
+{
+  "email": "user@example.com",
+  "password": "password"
+}
+
+Expected response includes:
+
+accessToken
+refreshToken
+role
+
+## 15. User Profile Endpoints
+Get Current User
+GET /api/users/me
+
+Role:
+
+Any authenticated user
+
+Returns the authenticated user's own profile.
+
+Expected responses:
+
+200 OK
+401 Unauthorized
+Update Current User
+PUT /api/users/me
+
+Request:
+
+{
+  "fullName": "Updated Name",
+  "phoneNumber": "0730000000"
+}
+
+Expected responses:
+
+200 OK
+400 Bad Request
+Security Rule
+
+The /me endpoints must always use the authenticated user's UserId from the JWT.
+
+A user must not be able to access or edit another user's profile using these endpoints.
