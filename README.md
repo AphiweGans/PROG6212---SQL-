@@ -10,7 +10,7 @@ RaceDay is a web-based event management platform designed for the South African 
 
 The system is intended to improve the management of road events by providing a structured platform where Event Organisers can create and manage events, categories, participants, enrolments, and results, while Participants can browse upcoming events, enter events, and view their personal performance history.
 
-Part 1 : focuses on system planning and database design. No application or API implementation is included at this stage.
+Part 1 focuses on system planning and database design. No application or API implementation is included at this stage.
 
 The three major deliverables are:
 
@@ -19,3 +19,19 @@ RESTful API Endpoint Plan
 SQL Server database creation and seed script
 
 These components have been designed to remain consistent so that the API in Part 2 and MVC application in Part 3 can be implemented from the same design.
+
+2. Project Objectives
+
+The main objectives of RaceDay are to:
+
+Provide a structured platform for road event management.
+Allow Organisers to create and manage events.
+Allow Organisers to define event categories.
+Allow Participants to browse upcoming events.
+Allow Participants to enrol in events.
+Prevent duplicate enrolments for the same event.
+Allow Organisers to capture participant results.
+Allow Participants to view their personal results.
+Provide public access to appropriate event and results information.
+Provide JWT-based authentication planning for future API implementation.
+Maintain consistency between the ERD, API and database.
