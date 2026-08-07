@@ -1,10 +1,10 @@
-RaceDay — Road Event Management System
+## RaceDay — Road Event Management System
 
-Portfolio of Evidence — Part 1
-System Planning and Database
-ERD • REST API Endpoint Plan • SQL Server Database
+## Portfolio of Evidence — Part 1
+## System Planning and Database
+## ERD • REST API Endpoint Plan • SQL Server Database
 
-1. Project Overview
+## 1. Project Overview
 
 RaceDay is a web-based event management platform designed for the South African road running, walking, and cycling community.
 
@@ -20,7 +20,7 @@ SQL Server database creation and seed script
 
 These components have been designed to remain consistent so that the API in Part 2 and MVC application in Part 3 can be implemented from the same design.
 
-2. Project Objectives
+## 2. Project Objectives
 
 The main objectives of RaceDay are to:
 
