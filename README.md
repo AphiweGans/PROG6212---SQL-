@@ -761,7 +761,7 @@ INSERT INTO dbo.Results
 VALUES
     (1, '00:52:14', 12, 'Finished', SYSUTCDATETIME());
 GO
-20.2 ERD ↔ SQL Consistency
+# 20.2 ERD ↔ SQL Consistency
 
 The ERD and SQL database are designed to match.
 
@@ -802,7 +802,7 @@ UNIQUE (EnrolmentId)
 The duplicate enrolment rule is enforced using:
 
 UNIQUE (ParticipantId, EventId)
-20.3 ERD ↔ API Consistency
+# 20.3 ERD ↔ API Consistency
 
 The API maps directly to the database design.
 
@@ -813,7 +813,7 @@ Categories	/api/events/{eventId}/categories and /api/categories/*
 Enrolments	/api/events/{eventId}/enrolments and /api/users/me/enrolments
 Results	/api/enrolments/{enrolmentId}/result and /api/results/*
 RefreshTokens	/api/auth/refresh and /api/auth/logout
-20.4 API Role Consistency
+# 20.4 API Role Consistency
 Public
 Browse events
 View event details
@@ -840,7 +840,7 @@ View own results
 
 No third role is introduced.
 
-20.5 Project Documentation
+# 20.5 Project Documentation
 
 The recommended /docs folder is:
 
@@ -867,7 +867,7 @@ SQL table structures.
 Sample data.
 ERD/SQL/API consistency.
 Documentation structure.
-20.6 Database Setup
+# 20.6 Database Setup
 Requirements
 
 The database script requires:
@@ -893,7 +893,7 @@ RefreshTokens
 
 Testing note: The project documentation should only state that the SQL script has been successfully tested after the student has actually tested it in SSMS.
 
-20.7 Future API and MVC Implementation
+# 20.7 Future API and MVC Implementation
 Part 2 — API
 
 The API can be implemented using ASP.NET Core.
@@ -920,7 +920,7 @@ Event ownership.
 Enrolment rules.
 Result relationships.
 Authentication rules.
-20.8 Future Improvements
+# 20.8 Future Improvements
 
 The current Part 1 design intentionally keeps the database within the required scope.
 
