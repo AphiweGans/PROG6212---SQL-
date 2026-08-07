@@ -35,3 +35,39 @@ Allow Participants to view their personal results.
 Provide public access to appropriate event and results information.
 Provide JWT-based authentication planning for future API implementation.
 Maintain consistency between the ERD, API and database.
+
+3. User Roles
+
+RaceDay contains exactly two system roles:
+
+Role	Description
+Organiser	Creates and manages events, categories, enrolments and participant results.
+Participant	Browses events, enrols in events and views personal enrolments and results.
+
+No Administrator or Superuser role is introduced in Part 1.
+
+Role Responsibilities
+Organiser
+
+An Organiser can:
+
+Create events.
+Update events they own.
+Delete events they own.
+Create event categories.
+Update categories.
+Delete categories.
+View enrolments for their events.
+Capture participant results.
+Update results.
+Participant
+
+A Participant can:
+
+Browse upcoming events.
+View event details.
+View categories.
+Enrol in an event.
+View their own enrolments.
+Cancel their own enrolment.
+View their personal results history.
