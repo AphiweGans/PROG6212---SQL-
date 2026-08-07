@@ -71,3 +71,20 @@ Enrol in an event.
 View their own enrolments.
 Cancel their own enrolment.
 View their personal results history.
+
+## 4. System Assumptions
+
+The following assumptions are used in the RaceDay database and API design:
+
+There are exactly two roles: Organiser and Participant.
+An Organiser who creates an event becomes the owner of that event.
+Each Event has one Organiser.
+A Category belongs to exactly one Event.
+An Enrolment specifies exactly one Category.
+A Participant can enrol in the same Event only once.
+Duplicate enrolments are prevented using a unique constraint on ParticipantId + EventId.
+A Result belongs to a specific Enrolment.
+Passwords are stored using PasswordHash, not plain-text passwords.
+JWT authentication is planned for Part 2.
+Refresh tokens are included to support secure JWT renewal.
+Weather and route information are stored as descriptive Event fields rather than separate database entities.
