@@ -685,3 +685,265 @@ CREATE TABLE dbo.RefreshTokens (
         REFERENCES dbo.Users(UserId)
 );
 GO
+## 20. Seed Data, Consistency, Setup and Documentation
+20.1 Sample Data
+
+The database uses fictional South African-inspired sample data for development and demonstration.
+
+Users
+INSERT INTO dbo.Users
+    (FullName, Email, PasswordHash, Role, PhoneNumber)
+VALUES
+    ('Thabo Nkosi', 'thabo.organiser@example.com',
+     'HASHED_PASSWORD_1', 'Organiser', '0821234567'),
+
+    ('Lerato Dube', 'lerato.organiser@example.com',
+     'HASHED_PASSWORD_2', 'Organiser', '0827654321'),
+
+    ('Sipho Mahlangu', 'sipho.participant@example.com',
+     'HASHED_PASSWORD_3', 'Participant', '0731112222'),
+
+    ('Anja van Wyk', 'anja.participant@example.com',
+     'HASHED_PASSWORD_4', 'Participant', '0733334444'),
+
+    ('Naledi Molefe', 'naledi.participant@example.com',
+     'HASHED_PASSWORD_5', 'Participant', '0735556666');
+GO
+Events
+INSERT INTO dbo.Events
+    (OrganiserId, Name, EventType, EventDate, Location, Description, RouteInfo)
+VALUES
+    (1,
+     'Highveld Community Fun Run',
+     'Road Race',
+     '2026-09-12 07:00',
+     'Johannesburg, Gauteng',
+     'A community charity run through the Highveld suburbs.',
+     'Flat tarred route, closed to traffic.'),
+
+    (1,
+     'Vaal River Cycle Challenge',
+     'Cycling',
+     '2026-10-03 06:30',
+     'Vanderbijlpark, Gauteng',
+     'An open-road cycling event along the Vaal River.',
+     'Rolling hills, water tables at 15km intervals.'),
+
+    (2,
+     'Garden Route Half Marathon',
+     'Marathon',
+     '2026-11-08 06:00',
+     'George, Western Cape',
+     'A scenic half marathon along the Garden Route.',
+     'Coastal road route with moderate elevation gain.');
+GO
+Categories
+INSERT INTO dbo.Categories
+    (EventId, Name, DistanceKm, MinAge, MaxAge)
+VALUES
+    (1, '5km Fun Run', 5.0, NULL, NULL),
+    (1, '10km Road Race', 10.0, 16, NULL),
+    (2, '40km Cycle', 40.0, 18, NULL),
+    (2, '80km Cycle', 80.0, 18, NULL),
+    (3, '21.1km Half Marathon', 21.1, 18, NULL);
+GO
+Enrolments
+INSERT INTO dbo.Enrolments
+    (ParticipantId, EventId, CategoryId, Status)
+VALUES
+    (3, 1, 2, 'Active'),
+    (4, 2, 3, 'Active'),
+    (5, 3, 5, 'Active');
+GO
+Results
+INSERT INTO dbo.Results
+    (EnrolmentId, FinishTime, Position, Status, RecordedAt)
+VALUES
+    (1, '00:52:14', 12, 'Finished', SYSUTCDATETIME());
+GO
+20.2 ERD ↔ SQL Consistency
+
+The ERD and SQL database are designed to match.
+
+Entity Consistency
+
+Every ERD entity has a corresponding SQL table:
+
+Users          → dbo.Users
+Events         → dbo.Events
+Categories     → dbo.Categories
+Enrolments     → dbo.Enrolments
+Results        → dbo.Results
+RefreshTokens  → dbo.RefreshTokens
+Primary Key Consistency
+
+Each ERD Primary Key corresponds to an SQL IDENTITY PRIMARY KEY.
+
+Foreign Key Consistency
+
+Each ERD Foreign Key has a matching SQL FOREIGN KEY constraint.
+
+Relationship Consistency
+
+The following relationships are maintained:
+
+Users → Events
+Events → Categories
+Users → Enrolments
+Events → Enrolments
+Categories → Enrolments
+Enrolments → Results
+Users → RefreshTokens
+
+The one-to-one relationship between Enrolments and Results is enforced using:
+
+UNIQUE (EnrolmentId)
+
+The duplicate enrolment rule is enforced using:
+
+UNIQUE (ParticipantId, EventId)
+20.3 ERD ↔ API Consistency
+
+The API maps directly to the database design.
+
+Database Entity	API Endpoint Group
+Users	/api/auth/* and /api/users/me
+Events	/api/events/*
+Categories	/api/events/{eventId}/categories and /api/categories/*
+Enrolments	/api/events/{eventId}/enrolments and /api/users/me/enrolments
+Results	/api/enrolments/{enrolmentId}/result and /api/results/*
+RefreshTokens	/api/auth/refresh and /api/auth/logout
+20.4 API Role Consistency
+Public
+Browse events
+View event details
+View categories
+View event results
+View weather/route information
+Any Authenticated User
+View own profile
+Update own profile
+Logout
+Organiser
+Create events
+Update own events
+Delete own events
+Manage categories
+View event enrolments
+Capture results
+Update results
+Participant
+Enrol in events
+View own enrolments
+Cancel own enrolment
+View own results
+
+No third role is introduced.
+
+20.5 Project Documentation
+
+The recommended /docs folder is:
+
+/docs
+│
+├── 01_Part1_Overview_and_ERD.md
+├── 02_API_Endpoint_Plan.md
+├── 03_RaceDay_Database_Script.sql
+├── 04_Consistency_Docs_README_GitHub.md
+└── RaceDay_ERD.png
+
+The root README provides a consolidated explanation of:
+
+Project overview.
+System roles.
+System assumptions.
+ERD.
+Database entities.
+Database relationships.
+API endpoint plan.
+API security.
+SQL Server database.
+SQL table structures.
+Sample data.
+ERD/SQL/API consistency.
+Documentation structure.
+20.6 Database Setup
+Requirements
+
+The database script requires:
+
+Microsoft SQL Server
+SQL Server Management Studio (SSMS)
+Setup Procedure
+Open SQL Server Management Studio.
+Connect to a local/development SQL Server instance.
+Open the RaceDay SQL script.
+Execute the script.
+Confirm that RaceDayDB has been created.
+Confirm that the six tables exist.
+Confirm that the sample records have been inserted.
+Test the database before treating the script as final.
+Tables Expected
+Users
+Events
+Categories
+Enrolments
+Results
+RefreshTokens
+
+Testing note: The project documentation should only state that the SQL script has been successfully tested after the student has actually tested it in SSMS.
+
+20.7 Future API and MVC Implementation
+Part 2 — API
+
+The API can be implemented using ASP.NET Core.
+
+The endpoint plan provides:
+
+HTTP methods.
+Routes.
+Roles.
+Request bodies.
+Expected responses.
+Ownership rules.
+
+The endpoints are therefore ready to be translated into controllers and API actions.
+
+Part 3 — MVC Application
+
+The MVC application can consume the planned API endpoints.
+
+The API and MVC layers should maintain the same:
+
+User roles.
+Event ownership.
+Enrolment rules.
+Result relationships.
+Authentication rules.
+20.8 Future Improvements
+
+The current Part 1 design intentionally keeps the database within the required scope.
+
+Possible future additions include:
+
+Event Images
+
+An ImageUrl field could be added to Events if required for future Azure Blob Storage integration.
+
+Weather Integration
+
+Weather information can later be populated dynamically through an external weather service.
+
+Route Integration
+
+Route information can later be connected to a mapping or GPS service.
+
+Docker
+
+The database schema does not contain environment-specific dependencies and can therefore support future containerisation.
+
+20.9 AI Usage Disclosure
+
+AI tools were used to assist with planning, structuring, reviewing and/or proofreading aspects of this work.
+
+The final design and submitted work must be reviewed and adapted by the student to ensure that the student understands the content and that it complies with the Portfolio of Evidence requirements.
