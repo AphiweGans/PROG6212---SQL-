@@ -93,20 +93,19 @@ Weather and route information are stored as descriptive Event fields rather than
 
 The RaceDay database contains six entities:
 
-Users
-Events
-Categories
-Enrolments
-Results
-RefreshTokens
+1. Users
+2. Events
+3. Categories
+4. Enrolments
+5. Results
+6. RefreshTokens
 
 The ERD represents the database structure, primary keys, foreign keys and relationships between the entities.
 
-Entity Purpose
-Entity	Purpose
-Users	Stores Organisers and Participants.
-Events	Stores road running, walking and cycling events.
+Entity    	Purpose
+Users	      Stores Organisers and Participants.
+Events	    Stores road running, walking and cycling events.
 Categories	Stores categories associated with an event.
 Enrolments	Connects Participants to Events and records their selected Category.
-Results	Stores results belonging to an Enrolment.
+Results	    Stores results belonging to an Enrolment.
 RefreshTokens	Supports JWT authentication and token renewal.
