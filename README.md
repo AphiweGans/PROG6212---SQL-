@@ -129,3 +129,29 @@ Email must be unique.
 Email cannot be NULL.
 Role must be either Organiser or Participant.
 Passwords must never be stored as plain text.
+
+## 7. Events Entity
+
+The Events entity stores events created and managed by Organisers.
+
+# Attributes
+Attribute	Type	Description
+EventId	INT	Primary Key and identity value.
+OrganiserId	INT	Foreign Key to Users.UserId.
+Name	NVARCHAR(150)	Name of the event.
+EventType	NVARCHAR(50)	Event type such as Marathon, Cycling or Walk.
+EventDate	DATETIME2	Date and time of the event.
+Location	NVARCHAR(200)	Event location.
+Description	NVARCHAR(MAX)	Optional event description.
+RouteInfo	NVARCHAR(MAX)	Route description or link.
+WeatherInfo	NVARCHAR(MAX)	Weather-related information.
+CreatedAt	DATETIME2	Date/time the event was created.
+Relationship
+
+Each Event belongs to exactly one Organiser.
+
+One Organiser can create many Events.
+
+# Relationship:
+
+Users 1 → Many Events
