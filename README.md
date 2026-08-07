@@ -88,3 +88,25 @@ Passwords are stored using PasswordHash, not plain-text passwords.
 JWT authentication is planned for Part 2.
 Refresh tokens are included to support secure JWT renewal.
 Weather and route information are stored as descriptive Event fields rather than separate database entities.
+
+## 5. Entity Relationship Diagram
+
+The RaceDay database contains six entities:
+
+Users
+Events
+Categories
+Enrolments
+Results
+RefreshTokens
+
+The ERD represents the database structure, primary keys, foreign keys and relationships between the entities.
+
+Entity Purpose
+Entity	Purpose
+Users	Stores Organisers and Participants.
+Events	Stores road running, walking and cycling events.
+Categories	Stores categories associated with an event.
+Enrolments	Connects Participants to Events and records their selected Category.
+Results	Stores results belonging to an Enrolment.
+RefreshTokens	Supports JWT authentication and token renewal.
