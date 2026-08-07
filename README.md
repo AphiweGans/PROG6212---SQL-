@@ -155,6 +155,7 @@ One Organiser can create many Events.
 # Relationship:
 
 Users 1 → Many Events
+
 ## 8. Categories Entity
 
 The Categories entity stores categories associated with individual events.
@@ -190,7 +191,7 @@ The Enrolments entity represents the relationship between Participants and Event
 
 It also records the Category selected by the Participant.
 
-Attributes
+# Attributes
 Attribute	Type	Description
 EnrolmentId	INT	Primary Key and identity value.
 ParticipantId	INT	Foreign Key to Users.UserId.
@@ -211,7 +212,7 @@ Relationship
 
 The Results entity stores the performance result of a participant's enrolment.
 
-Attributes
+# Attributes
 Attribute	Type	Description
 ResultId	INT	Primary Key and identity value.
 EnrolmentId	INT	Foreign Key to Enrolments.EnrolmentId.
@@ -243,3 +244,21 @@ Participants and Events have a many-to-many relationship resolved through Enrolm
 Users ↔ Events
       |
  Enrolments
+
+## 11. RefreshTokens Entity
+
+The RefreshTokens entity supports JWT authentication and secure token renewal planned for Part 2.
+
+# Attributes
+Attribute	Type	Description
+TokenId	INT	Primary Key and identity value.
+UserId	INT	Foreign Key to Users.UserId.
+Token	NVARCHAR(MAX)	Refresh token value.
+ExpiresAt	DATETIME2	Token expiry date/time.
+CreatedAt	DATETIME2	Token creation date/time.
+Revoked	BIT	Indicates whether token has been revoked.
+Relationship
+
+One User can have many RefreshTokens.
+
+Users 1 → Many RefreshTokens
