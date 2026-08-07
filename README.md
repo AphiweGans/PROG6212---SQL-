@@ -36,7 +36,7 @@ Provide public access to appropriate event and results information.
 Provide JWT-based authentication planning for future API implementation.
 Maintain consistency between the ERD, API and database.
 
-3. User Roles
+## 3. User Roles
 
 RaceDay contains exactly two system roles:
 
