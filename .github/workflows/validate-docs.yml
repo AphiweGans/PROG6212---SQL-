@@ -1,0 +1,16 @@
+name: Validate Docs Structure
+
+on: [push, pull_request]
+
+jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check /docs folder exists
+        run: test -d docs
+      - name: Check required files exist
+        run: |
+          test -f docs/database-script.sql
+          ls docs/erd.* 
+          ls docs/api-endpoint-plan.*
